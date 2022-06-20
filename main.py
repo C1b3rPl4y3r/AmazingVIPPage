@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+import os
 
 app = Flask(__name__)
 
@@ -13,7 +14,7 @@ def login():
     if request.method == "GET":
         return render_template("index.html")
     else:
-        if request.form.get("username") == "C1b3rPl4y3r" and request.form.get("password") == "C1b3rWall{dont_store_passwords_in_code}":
+        if request.form.get("username") == os.environ.get('USER') and request.form.get("password") == os.environ.get('password'):
             return render_template("secret.html")
         else:
             return render_template("index.html")
